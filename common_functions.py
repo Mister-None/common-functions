@@ -1,0 +1,34 @@
+import sys, re, pandas as pd
+from colorama import Fore, init
+
+init(autoreset=True)
+
+class CommonFunctions:
+    @staticmethod
+    def list_of_functions(*args):
+        print(Fore.RED + 'Enter number of function!')
+        for id, i in enumerate(args):
+            if i:
+                print(f"{Fore.LIGHTYELLOW_EX}{id} {Fore.LIGHTGREEN_EX}==> {Fore.LIGHTBLUE_EX}{i}")
+        sys.exit(1)
+
+    def list_of_functions_v(*args):
+        for id, i in enumerate(args):
+            if i:
+                print(f"{Fore.LIGHTYELLOW_EX}{id} {Fore.LIGHTGREEN_EX}==> {Fore.LIGHTBLUE_EX}{i}")
+
+    @staticmethod
+    def text_normalizer(raw_text):
+        raw = str(raw_text).lower().strip()
+        raw = re.sub(r"""[,.()"'|!?/«»_:;”=’`~\n]""", ' ', raw)
+        raw = re.sub(' +', ' ', raw)
+        if raw == 'nan':
+            return None
+        else:
+            return raw
+
+    @staticmethod
+    def xlsx(mode, **columns):
+        df = pd.DataFrame(columns)
+        df.to_excel(mode+'.xlsx', index=False)
+
