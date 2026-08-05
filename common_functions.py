@@ -32,3 +32,11 @@ class CommonFunctions:
         df = pd.DataFrame(columns)
         df.to_excel(mode+'.xlsx', index=False)
 
+
+    @staticmethod
+    def temp_clipboard(mode, **lists):
+        list_values = list(lists.values())
+        with open(mode, 'w') as f:
+            for row in zip(*list_values):
+                line = '\t'.join(str(item) for item in row)
+                f.write(line + '\n')
