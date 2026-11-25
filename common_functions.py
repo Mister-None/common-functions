@@ -48,3 +48,5 @@ class CommonFunctions:
         subprocess.run("mullvad disconnect --wait", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run(f"mullvad relay set location {server}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("mullvad connect --wait", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["curl", "https://api.ipify.org"])
+
