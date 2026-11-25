@@ -1,4 +1,4 @@
-import sys, re, pandas as pd
+import sys, re, pandas as pd, subprocess
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -40,3 +40,11 @@ class CommonFunctions:
             for row in zip(*list_values):
                 line = '\t'.join(str(item) for item in row)
                 f.write(line + '\n')
+        input('Paste >>> ')
+        subprocess.run(f"cat {mode} | wl-copy && rm {mode}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)            
+
+    @staticmethod
+    def connect_vpn(server):
+        subprocess.run("mullvad disconnect --wait", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(f"mullvad relay set location {server}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run("mullvad connect --wait", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
